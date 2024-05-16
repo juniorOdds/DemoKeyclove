@@ -28,6 +28,7 @@ body {
 }
 
 .login-page-container{
+  background-color: #0099d3;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -35,8 +36,11 @@ body {
 }
 
 .login-pf-page {
-  margin-top: -12rem;
   width: 25rem;
+  background-color: #f4f4f4;
+  border-color: #ffffff00;
+  border-radius: 20px;
+  
 }
 
 .card-pf,
