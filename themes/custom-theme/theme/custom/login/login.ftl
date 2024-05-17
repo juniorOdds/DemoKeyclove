@@ -1,8 +1,12 @@
 <#import "template.ftl" as layout>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
+
 <@layout.registrationLayout displayMessage=!messagesPerField.existsError('username','password') displayInfo=realm.password && realm.registrationAllowed && !registrationDisabled??; section>
     <#if section = "header">
         ${msg("loginAccountTitle")}
     <#elseif section = "form">
+    
+
     <div id="kc-form">
       <div id="kc-form-wrapper">
         <#if realm.password>
@@ -11,13 +15,13 @@
                     <div class="${properties.kcFormGroupClass!}">
                         <!-- <label for="username" class="${properties.kcLabelClass!}"><#if !realm.loginWithEmailAllowed>${msg("username")}<#elseif !realm.registrationEmailAsUsername>${msg("usernameOrEmail")}<#else>${msg("email")}</#if></label> -->
 
-                        <input tabindex="1" id="username" class="${properties.kcInputClass!}" placeholder="${msg('username')}" name="username" value="${(login.username!'')}"  type="text" autofocus autocomplete="off"
-                               aria-invalid="<#if messagesPerField.existsError('username','password')>true</#if>"
+                        <input tabindex="1" id="username" class="${properties.kcInputClass!}" placeholder="Email" name="username" value="${(login.username!'')}"  type="text" autofocus autocomplete="off"
+                               aria-invalid="<#if messagesPerField.existsError('username','password')>true</#if>" style="font-family: 'inter';" 
                         />
 
                         <#if messagesPerField.existsError('username','password')>
                             <span id="input-error" class="${properties.kcInputErrorMessageClass!}" aria-live="polite"> 
-                                <p>ssss</p>
+                                ${kcSanitize(messagesPerField.getFirstError('username','password'))?no_esc}
                             </span>
                         </#if>
 
@@ -28,7 +32,7 @@
                     <!-- <label for="password" class="${properties.kcLabelClass!}">${msg("password")}</label> -->
 
                     <input tabindex="2" id="password" class="${properties.kcInputClass!}" placeholder="${msg('password')}" name="password" type="password" autocomplete="off"
-                           aria-invalid="<#if messagesPerField.existsError('username','password')>true</#if>"
+                           aria-invalid="<#if messagesPerField.existsError('username','password')>true</#if>" style="font-family: 'inter';" 
                     />
 
                     <#if usernameHidden?? && messagesPerField.existsError('username','password')>
@@ -63,7 +67,7 @@
 
                   <div id="kc-form-buttons" class="${properties.kcFormGroupClass!}">
                       <input type="hidden" id="id-hidden-input" name="credentialId" <#if auth.selectedCredential?has_content>value="${auth.selectedCredential}"</#if>/>
-                      <input tabindex="4" class="${properties.kcButtonClass!} ${properties.kcButtonPrimaryClass!} ${properties.kcButtonBlockClass!} ${properties.kcButtonLargeClass!}" name="login" id="kc-login" type="submit" value="${msg("doLogIn")}"/>
+                      <input tabindex="4" class="${properties.kcButtonClass!} ${properties.kcButtonPrimaryClass!} ${properties.kcButtonBlockClass!} ${properties.kcButtonLargeClass!}" name="login" id="kc-login" type="submit" value="Login"/>
                   </div>
             </form>
         </#if>

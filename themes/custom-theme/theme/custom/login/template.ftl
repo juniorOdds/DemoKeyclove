@@ -38,6 +38,7 @@
 
 <body class="${properties.kcBodyClass!}">
 <div class="login-page-container">
+
     <div class="${properties.kcLoginClass!}">
         <div class="${properties.kcFormCardClass!}">
           
@@ -65,11 +66,11 @@
                             <span class="subtitle"><span class="required">*</span> ${msg("requiredFields")}</span>
                         </div>
                         <div class="col-md-10">
-                            <h1 id="kc-page-title">Sign in</h1>
+                            <h1 id="kc-page-title">Login</h1>
                         </div>
                     </div>
                 <#else>
-                    <h1 id="kc-page-title">Sign in</h1>
+                    <h1 id="kc-page-title">Login</h1>
                 </#if>
             <#else>
                 <#if displayRequiredFields>
