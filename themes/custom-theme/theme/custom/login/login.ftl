@@ -1,5 +1,7 @@
 <#import "template.ftl" as layout>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
+<link rel="stylesheet" href="sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <@layout.registrationLayout displayMessage=!messagesPerField.existsError('username','password') displayInfo=realm.password && realm.registrationAllowed && !registrationDisabled??; section>
     <#if section = "header">
@@ -16,15 +18,17 @@
                         <!-- <label for="username" class="${properties.kcLabelClass!}"><#if !realm.loginWithEmailAllowed>${msg("username")}<#elseif !realm.registrationEmailAsUsername>${msg("usernameOrEmail")}<#else>${msg("email")}</#if></label> -->
 
                         <input tabindex="1" id="username" class="${properties.kcInputClass!}" placeholder="Email" name="username" value="${(login.username!'')}"  type="text" autofocus autocomplete="off"
-                               aria-invalid="<#if messagesPerField.existsError('username','password')>true</#if>" style="font-family: 'inter';" 
+                               aria-invalid="<#if messagesPerField.existsError('username','password')>true</#if>" style="font-family: 'inter'; border-radius: 15px; height: 50px;"
                         />
 
                         <#if messagesPerField.existsError('username','password')>
-                            <span id="input-error" class="${properties.kcInputErrorMessageClass!}" aria-live="polite"> 
-                                ${kcSanitize(messagesPerField.getFirstError('username','password'))?no_esc}
-                            </span>
+                            <script>Swal.fire({
+                                        icon: "error",
+                                        title: "อุ๊ปส์ ซวอรี่ !",
+                                        text: "Invalid email or password",
+                            });
+                            </script>
                         </#if>
-
                     </div>
                 </#if>
 
@@ -32,7 +36,7 @@
                     <!-- <label for="password" class="${properties.kcLabelClass!}">${msg("password")}</label> -->
 
                     <input tabindex="2" id="password" class="${properties.kcInputClass!}" placeholder="${msg('password')}" name="password" type="password" autocomplete="off"
-                           aria-invalid="<#if messagesPerField.existsError('username','password')>true</#if>" style="font-family: 'inter';" 
+                           aria-invalid="<#if messagesPerField.existsError('username','password')>true</#if>" style="font-family: 'inter'; border-radius: 15px; height: 50px;"
                     />
 
                     <#if usernameHidden?? && messagesPerField.existsError('username','password')>
